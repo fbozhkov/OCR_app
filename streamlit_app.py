@@ -100,8 +100,8 @@ if uploaded_receipts is not None:
     receipt_items = extract_info(text)
     col2.title("Extracted Items:")
     col2.text(receipt_items)
-    col2.title("Raw OCR (beta testing)")
-    col2.text(text)
+    #col2.title("Raw OCR (beta testing)")
+    #col2.text(text)
 
     result = st.button("Get insights")
     if result:
