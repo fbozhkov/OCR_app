@@ -14,21 +14,47 @@ def sort_text(receipt):
     #Text = str(open(receipt, 'r').read())
 
     # Text sorting
-    Com_words = ['REWE', 'EUR', 'SUMME', 'PAYBACK', 'BAR']
-    Pattern = re.compile(
-        r'\b[A-Z]{2,15} [A-Z]{2,15} [A-Z]{2,15}\b|\b[A-Z]{2,15}. [A-Z]{2,15}\b|\b[A-Z]{2,15} [A-Z]{2,15}\b|\b[A-Z]{2,15}\b')
-    Digits = re.findall(r'\d{1,2},\d{2} A|\d{1,2},\d{2}\s*B', receipt)
-    Words = Pattern.findall(receipt)
-    Digits_filt = []
-    Words_capital = []
-    for w in Words:
-        if w not in Com_words:
+    # Com_words = ['REWE', 'EUR', 'SUMME', 'PAYBACK', 'BAR']
+    # Pattern = re.compile(
+    #     r'\b[A-Z]{2,15} [A-Z]{2,15} [A-Z]{2,15}\b|\b[A-Z]{2,15}. [A-Z]{2,15}\b|\b[A-Z]{2,15} [A-Z]{2,15}\b|\b[A-Z]{2,15}\b')
+    # Digits = re.findall(r'\d{1,2},\d{2} A|\d{1,2},\d{2}\s*B', receipt)
+    # Words = Pattern.findall(receipt)
+    # Digits_filt = []
+    # Words_capital = []
+    # for w in Words:
+    #     if w not in Com_words:
+    #         Words_capital.append(w)
+    # for d in Digits:
+    #     d = d.strip(' AB')
+    #     Digits_filt.append(d)
+    #
+    # return Words_capital,Digits_filt
+
+    Com_words = re.compile(r"\bREWE\b|\bEUR\b|\bEJR\b|\bCUR\b|\bPAYBACK\b|\bSUMME\b|")
+    Com_words_2 = re.compile(r"\bA\b|\bB\b")
+    # EJR and CUR is added to counter mis interpretation of 'EUR' Characters
+
+    W_Pattern = re.compile(
+        r"\b[A-Z.]+ [A-Z./]+ [A-Z.]+\b|\b[A-Z.]+ [0-9,]* [A-Z.%]*\b|\b[A-Z.!]+ [A-Z.]+\b|\b[A-Z]+\b"
+    )
+    D_Pattern = re.compile(r"\d{1,2},\d{2}[ ][AB]")
+    receipt = re.sub(Com_words, "", text)
+    Words = W_Pattern.findall(receipt)
+    Digits = D_Pattern.findall(receipt)
+    Words_capital = [ ]
+    Digits_filt = [ ]
+    for w in Words :
+        if not Com_words_2.match(w) :
+            w = re.sub(r"[0-9,%]+", "", w)
+            #w = re.sub(r" [AB]", "", w)
+            w = w.rstrip(" ")
             Words_capital.append(w)
-    for d in Digits:
-        d = d.strip(' AB')
+    for d in Digits :
+        d = d.rstrip(" AB")
         Digits_filt.append(d)
 
-    return Words_capital,Digits_filt
+    return Words_capital, Digits_filt
+
 
 # Takes 'UID' as a cue where the items start and 'BAR' where it ends
 def items_only(words_capital, digits_filt):
