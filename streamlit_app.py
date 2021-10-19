@@ -30,23 +30,23 @@ def sort_text(receipt):
     #
     # return Words_capital,Digits_filt
 
-    Com_words = re.compile(r"\bREWE\b|\bEUR\b|\bEJR\b|\bCUR\b|\bPAYBACK\b|\bSUMME\b|")
+    Com_words = re.compile(r"\bEUR\b|\bEJR\b|\bCUR\b|\bPAYBACK\b|\bSUMME\b")
     Com_words_2 = re.compile(r"\bA\b|\bB\b")
     # EJR and CUR is added to counter mis interpretation of 'EUR' Characters
 
     W_Pattern = re.compile(
-        r"\b[A-Z.]+ [A-Z./]+ [A-Z.]+\b|\b[A-Z.]+ [0-9,]* [A-Z.%]*\b|\b[A-Z.!]+ [A-Z.]+\b|\b[A-Z]+\b"
+        r"\b[A-Z]+[.]? [A-Z/]+[.]? [A-Z+]+[.]? [A-Z+]+[.]?\b|\b[A-Z]+[.]? [A-Z/]+[.]? [A-Z+]+[.]?\b|\b[A-Z]+[.]? [0-9,]*[.]? [A-Z%]*[.]?\b|\b[A-Z.!]+ [A-Z.]+\b|\b[A-Z]+\b"
     )
     D_Pattern = re.compile(r"\d{1,2},\d{2}[ ][AB]")
-    receipt = re.sub(Com_words, "", text)
+    receipt = re.sub(Com_words, "", receipt)
     Words = W_Pattern.findall(receipt)
     Digits = D_Pattern.findall(receipt)
     Words_capital = [ ]
     Digits_filt = [ ]
     for w in Words :
         if not Com_words_2.match(w) :
-            w = re.sub(r"[0-9,%]+", "", w)
-            #w = re.sub(r" [AB]", "", w)
+            w = re.sub(r"\d{1,2},\d{2}", "", w)
+            w = re.sub(r"[ ]+[AB]\b", "", w)
             w = w.rstrip(" ")
             Words_capital.append(w)
     for d in Digits :
