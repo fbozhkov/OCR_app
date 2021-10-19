@@ -68,7 +68,7 @@ def items_only(words_capital, digits_filt):
 
     df_items = pd.DataFrame(words_filt, columns=['Items'])
     df_items['Price'] = pd.DataFrame(digits_filt)
-    #df_items = df_items.dropna()
+    df_items = df_items.dropna()
 
     return df_items
 
