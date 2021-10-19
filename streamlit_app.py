@@ -37,7 +37,7 @@ def sort_text(receipt):
     W_Pattern = re.compile(
         r"\b[A-Z]+[.]? [A-Z/]+[.]? [A-Z+]+[.]? [A-Z+]+[.]?\b|\b[A-Z]+[.]? [A-Z/]+[.]? [A-Z+]+[.]?\b|\b[A-Z]+[.]? [0-9,]*[.]? [A-Z%]*[.]?\b|\b[A-Z.!]+ [A-Z.]+\b|\b[A-Z]+\b"
     )
-    D_Pattern = re.compile(r"\d{1,2},\d{2}[ ]?[AB8]")
+    D_Pattern = re.compile(r"\d{1,2},\d{2}[ ][AB]")
     receipt = re.sub(Com_words, "", receipt)
     Words = W_Pattern.findall(receipt)
     Digits = D_Pattern.findall(receipt)
