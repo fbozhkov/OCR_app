@@ -121,7 +121,7 @@ if uploaded_receipts is not None:
     #gray = cv2.cvtColor(img_array, cv2.COLOR_BGR2GRAY) # this line is not needed when using receiptsScan600dpi folder
     thresh = 255 - (cv2.threshold(img_array, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1])
 
-    custom_config = r'-l deu --oem 3 --psm 6'
+    custom_config = r'--oem 3 --psm 6'
     text = pytesseract.image_to_string(thresh, config=custom_config)
 
     receipt_items = extract_info(text)
