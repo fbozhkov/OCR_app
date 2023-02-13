@@ -9,26 +9,11 @@ import math
 import matplotlib.pyplot as plt
 
 st.write("""
-# Upload receipt(s) for data extraction""")
+# Upload receipt for data extraction""")
+st.write("""
+This application is configured to work with REWE supermarket receipts. You can download test data from [here]
+(https://drive.google.com/drive/folders/1wOHWXZ9YdNFdMj1tUComWSqChMXi4EI9?usp=sharing)""")
 def sort_text(receipt):
-    #Text = str(open(receipt, 'r').read())
-
-    # Text sorting
-    # Com_words = ['REWE', 'EUR', 'SUMME', 'PAYBACK', 'BAR']
-    # Pattern = re.compile(
-    #     r'\b[A-Z]{2,15} [A-Z]{2,15} [A-Z]{2,15}\b|\b[A-Z]{2,15}. [A-Z]{2,15}\b|\b[A-Z]{2,15} [A-Z]{2,15}\b|\b[A-Z]{2,15}\b')
-    # Digits = re.findall(r'\d{1,2},\d{2} A|\d{1,2},\d{2}\s*B', receipt)
-    # Words = Pattern.findall(receipt)
-    # Digits_filt = []
-    # Words_capital = []
-    # for w in Words:
-    #     if w not in Com_words:
-    #         Words_capital.append(w)
-    # for d in Digits:
-    #     d = d.strip(' AB')
-    #     Digits_filt.append(d)
-    #
-    # return Words_capital,Digits_filt
 
     Com_words = re.compile(r"\bEUR\b|\bEJR\b|\bCUR\b|\bPAYBACK\b|\bSUMME\b")
     Com_words_2 = re.compile(r"\bA\b|\bB\b")
