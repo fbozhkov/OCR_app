@@ -11,8 +11,8 @@ import matplotlib.pyplot as plt
 st.write("""
 # Upload receipt for data extraction""")
 st.write("""
-This application is configured to work with REWE supermarket receipts. You can download test data from [here]
-(https://drive.google.com/drive/folders/1wOHWXZ9YdNFdMj1tUComWSqChMXi4EI9?usp=sharing)""")
+This application is configured to work with REWE supermarket receipts. You can download test data from
+[here](https://drive.google.com/drive/folders/1wOHWXZ9YdNFdMj1tUComWSqChMXi4EI9?usp=sharing)""")
 def sort_text(receipt):
 
     Com_words = re.compile(r"\bEUR\b|\bEJR\b|\bCUR\b|\bPAYBACK\b|\bSUMME\b")
